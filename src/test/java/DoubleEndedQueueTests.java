@@ -5,8 +5,26 @@ import java.util.ConcurrentModificationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+class DoubleEndedQueueTest {
 
-class DoubleEndedQueueTests {
+    @Test
+    void defaultTest(){
+        DoubleEndedQueue<Integer> q = new DoubleEndedQueue<>();
+        assertTrue(q.isEmpty());
+        int count = 100000;
+        for (int i = 0; i < count; i++) {
+            q.pushLast(i);
+            assertEquals(q.size(), i + 1);
+            assertTrue(q.first() == 0);
+        }
+        int current = 0;
+        while (!q.isEmpty()) {
+            assertTrue(q.first() == current);
+            assertTrue(q.popFirst() == current);
+            current++;
+        }
+        assertTrue(q.isEmpty());
+    }
 
     @Test
     void verifyFirst(){
@@ -24,7 +42,7 @@ class DoubleEndedQueueTests {
 
         var size = q.size();
         for (int i = 0; i < size; i++) {
-            assertTrue(!q.isEmpty());
+            assertFalse(q.isEmpty());
             q.popFirst();
         }
 
