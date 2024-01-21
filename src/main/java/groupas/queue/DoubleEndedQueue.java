@@ -200,11 +200,17 @@ public class DoubleEndedQueue<E> implements DeQueue<E> {
     }
 
     public String toString() {
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_CYAN = "\u001B[36m";
+        final String ANSI_PURPLE = "\u001B[35m";
+
+
         StringBuilder string = new StringBuilder();
-        string.append("Count: " + count + "\n")
-                .append("Front: " + front + "\n")
-                .append("Rear: " + rear + "\n")
-                .append("InternalView: ");
+        string.append(ANSI_PURPLE + "Count: " + count + ANSI_RESET + "\n")
+                .append(ANSI_PURPLE + "Front: " + front + ANSI_RESET + "\n")
+                .append(ANSI_PURPLE + "Rear: " + rear + ANSI_RESET +"\n")
+                .append(ANSI_RED + "InternalView: " + ANSI_RESET);
 
         for (int i = 0; i < array.length; i++) {
             string.append(array[i] != null ? array[i] : "empty")
@@ -212,7 +218,7 @@ public class DoubleEndedQueue<E> implements DeQueue<E> {
         }
         string.replace(string.length() - 2, string.length(), "\n").toString();
 
-        string.append("ActualView: ");
+        string.append(ANSI_CYAN + "ActualView: " + ANSI_RESET);
         var iterator = iterator();
         while (iterator.hasNext()){
             string.append(iterator.next()+ ", ");
