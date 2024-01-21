@@ -18,6 +18,7 @@ public class DoubleEndedQueue<E> implements DeQueue<E> {
 
     public DoubleEndedQueue() {
         this.array = (E[]) new Object[size];
+
     }
 
     @Override
@@ -137,6 +138,9 @@ public class DoubleEndedQueue<E> implements DeQueue<E> {
     }
 
     private void shrink(){
+        if (array.length <=4)
+            return;
+
         var newArray = (E[]) new Object[size / 2];
 
         var it = iterator();
